@@ -72,39 +72,54 @@ if (existsSync(skillsSrc)) {
 // --- jq check ---
 const yellow = (s) => `\x1b[33m${s}\x1b[0m`;
 
-function hasJq() {
-  return spawnSync('jq', ['--version'], { stdio: 'ignore' }).status === 0;
+function hasCmd(cmd) {
+  return spawnSync(cmd, ['--version'], { stdio: 'ignore' }).status === 0;
+}
+
+function tryInstall(label, ...args) {
+  console.log(`  ${yellow('!')} jq not found — installing via ${label}…`);
+  return spawnSync(args[0], args.slice(1), { stdio: 'inherit' }).status === 0;
 }
 
 function installJq() {
   const os = platform();
+
   if (os === 'darwin') {
-    const hasBrew = spawnSync('brew', ['--version'], { stdio: 'ignore' }).status === 0;
-    if (hasBrew) {
-      console.log(`  ${yellow('!')} jq not found — installing via Homebrew…`);
-      const result = spawnSync('brew', ['install', 'jq'], { stdio: 'inherit' });
-      return result.status === 0;
-    }
-  } else if (os === 'linux') {
-    const hasApt = spawnSync('apt-get', ['--version'], { stdio: 'ignore' }).status === 0;
-    if (hasApt) {
-      console.log(`  ${yellow('!')} jq not found — installing via apt…`);
-      const result = spawnSync('sudo', ['apt-get', 'install', '-y', 'jq'], { stdio: 'inherit' });
-      return result.status === 0;
-    }
+    if (hasCmd('brew'))   return tryInstall('Homebrew', 'brew', 'install', 'jq');
+    if (hasCmd('port'))   return tryInstall('MacPorts', 'sudo', 'port', 'install', 'jq');
   }
+
+  if (os === 'linux') {
+    if (hasCmd('apt-get'))  return tryInstall('apt',    'sudo', 'apt-get', 'install', '-y', 'jq');
+    if (hasCmd('dnf'))      return tryInstall('dnf',    'sudo', 'dnf',     'install', '-y', 'jq');
+    if (hasCmd('yum'))      return tryInstall('yum',    'sudo', 'yum',     'install', '-y', 'jq');
+    if (hasCmd('pacman'))   return tryInstall('pacman', 'sudo', 'pacman',  '-S', '--noconfirm', 'jq');
+    if (hasCmd('zypper'))   return tryInstall('zypper', 'sudo', 'zypper',  'install', '-y', 'jq');
+    if (hasCmd('apk'))      return tryInstall('apk',    'sudo', 'apk',     'add', 'jq');
+  }
+
+  if (os === 'win32') {
+    if (hasCmd('winget'))  return tryInstall('winget', 'winget', 'install', '--id', 'jqlang.jq', '-e', '--silent');
+    if (hasCmd('choco'))   return tryInstall('Chocolatey', 'choco', 'install', 'jq', '-y');
+    if (hasCmd('scoop'))   return tryInstall('Scoop', 'scoop', 'install', 'jq');
+  }
+
   return false;
 }
 
-if (!hasJq()) {
+if (!hasCmd('jq')) {
   const installed = installJq();
   if (installed) {
     console.log(`  ${green('✓')} jq installed`);
   } else {
     console.log(`\n  ${yellow('!')} jq is required for the statusline but could not be installed automatically.`);
     console.log(`  ${dim('Install it manually:')}`);
-    console.log(`  ${dim('  macOS:  brew install jq')}`);
-    console.log(`  ${dim('  Linux:  sudo apt install jq')}`);
+    console.log(`  ${dim('  macOS:   brew install jq')}`);
+    console.log(`  ${dim('  Ubuntu:  sudo apt install jq')}`);
+    console.log(`  ${dim('  Fedora:  sudo dnf install jq')}`);
+    console.log(`  ${dim('  Arch:    sudo pacman -S jq')}`);
+    console.log(`  ${dim('  Alpine:  sudo apk add jq')}`);
+    console.log(`  ${dim('  Windows: winget install jqlang.jq')}`);
   }
 } else {
   console.log(`  ${green('✓')} jq`);
