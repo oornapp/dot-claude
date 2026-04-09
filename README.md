@@ -22,7 +22,6 @@ npx @oorn/dotclaude@latest init
 |------|-------------|-------------|
 | `settings.json` | `~/.claude/settings.json` | Claude Code preferences |
 | `statusline-command.sh` | `~/.claude/statusline-command.sh` | Status line script |
-| `rules/git-commits.md` | `~/.claude/rules/git-commits.md` | Rule: no AI attribution in commits |
 
 ## Statusline
 
@@ -109,14 +108,6 @@ The full payload Claude Code sends to the script includes:
   "version": "2.1.97"
 }
 ```
-
-## Rules
-
-Rules are installed into `~/.claude/rules/` and apply globally to all Claude Code sessions.
-
-| Rule | Description |
-|------|-------------|
-| `git-commits.md` | Suppresses AI attribution lines (`Co-Authored-By`, `Generated with Claude Code`) from commit messages |
 
 ## Updating the config
 
