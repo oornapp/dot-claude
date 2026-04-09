@@ -23,20 +23,42 @@ npx @oorn/dotclaude@latest init
 
 ## Statusline
 
-The status line displays at the bottom of Claude Code and shows:
+The status line is mode-aware — it adapts based on whether you're on a subscription plan or using an API key.
 
+**Subscription (Pro/Max):**
 ```
-Sonnet 4.6 | [████                ] 21% | 42k/200k | 5h:18% (2h5m) 7d:17%
+Claude Sonnet 4.6 | [████                ] 42% | 84k/200k | 5h:37% (1h22m) 7d:15%
+```
+
+**Anthropic API key (`claude-*` models):**
+```
+Claude Sonnet 4.6 | [████                ] 42% | 84k/200k | ~$0.5544
+```
+
+**3rd-party API (Gemini, MiniMax, etc.):**
+```
+Gemini 2.5 Pro | [███████████         ] 55% | 550k/1000k
 ```
 
 | Segment | Description |
 |---------|-------------|
-| `Sonnet 4.6` | Current model name |
+| Model name | Current model display name |
 | `[████   ]` | Context window usage bar (green < 50%, yellow < 80%, red ≥ 80%) |
-| `21%` | Context used percentage |
-| `42k/200k` | Used tokens / total context window size |
-| `5h:18% (2h5m)` | 5-hour rate limit usage + countdown to reset (Claude Max only) |
-| `7d:17%` | 7-day rate limit usage (Claude Max only) |
+| `42%` | Context used percentage |
+| `84k/200k` | Used tokens / total context window size |
+| `5h:37% (1h22m)` | 5-hour rate limit usage + countdown to reset *(subscription only)* |
+| `7d:15%` | 7-day rate limit usage *(subscription only)* |
+| `~$0.5544` | Estimated session cost *(Anthropic API only)* |
+
+Cost is estimated using a 70/30 input/output token split with per-model pricing:
+
+| Model | Input | Output |
+|-------|-------|--------|
+| Opus 4.x | $15/MTok | $75/MTok |
+| Sonnet 4.x / 3.7 | $3/MTok | $15/MTok |
+| Haiku 4.x / 3.x | $0.8/MTok | $4/MTok |
+
+For 3rd-party models the right section is omitted — token usage is already visible in the bar.
 
 ### Requirements
 
