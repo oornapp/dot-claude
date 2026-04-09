@@ -19,17 +19,26 @@ After every change:
    npm publish --access public && git push
    ```
 
+## Pre-commit/Push Rules
+- Keep commits focused on the actual code changes
+- **DO NOT** commit and push any confidential information (such as dotenv files, API keys, database credentials, etc.) to git repository!
+- NEVER automatically add AI attribution signatures like:
+  "🤖 Generated with [Claude Code]"
+  "Co-Authored-By: Claude noreply@anthropic.com"
+  Any AI tool attribution or signature
+- Create clean, professional commit messages without AI references. Use conventional commit format.
+
 **Always update README.md after every change.** The README is the user-facing doc — keep examples, tables, and descriptions in sync with the actual behavior.
 
 ## Architecture
 
-| File | Role |
-|------|------|
-| `bin/cli.js` | npx entry point — copies `.claude/` files to `~/.claude/`, checks/installs `jq` |
-| `install.sh` | Dev install — symlinks instead of copying, for live edits |
-| `.claude/statusline-command.sh` | The statusline script itself (bash, reads JSON from stdin) |
-| `.claude/settings.json` | Claude Code settings (statusline wired here) |
-| `.claude/rules/` | Global rules installed into `~/.claude/rules/` |
+| File                            | Role                                                                            |
+| ------------------------------- | ------------------------------------------------------------------------------- |
+| `bin/cli.js`                    | npx entry point — copies `.claude/` files to `~/.claude/`, checks/installs `jq` |
+| `install.sh`                    | Dev install — symlinks instead of copying, for live edits                       |
+| `.claude/statusline-command.sh` | The statusline script itself (bash, reads JSON from stdin)                      |
+| `.claude/settings.json`         | Claude Code settings (statusline wired here)                                    |
+| `.claude/rules/`                | Global rules installed into `~/.claude/rules/`                                  |
 
 ## Statusline logic
 
