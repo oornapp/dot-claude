@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync } from 'fs';
+import { existsSync, mkdirSync, copyFileSync, readdirSync, statSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { homedir } from 'os';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const VERSION = '1.0.0';
+const { version: VERSION } = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf8'));
 const CLAUDE_DIR = join(homedir(), '.claude');
 const SRC_DIR = join(__dirname, '..', '.claude');
 
