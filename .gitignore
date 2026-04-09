@@ -1,0 +1,19 @@
+# Never sync these
+.claude/history.jsonl
+.claude/stats-cache.json
+.claude/mcp-needs-auth-cache.json
+.claude/projects/
+.claude/sessions/
+.claude/image-cache/
+.claude/cache/
+.claude/file-history/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/telemetry/
+.claude/backups/
+.claude/tasks/
+.claude/teams/
+.claude/ide/
+.claude/paste-cache/
+.claude/plans/
+.claude/downloads/
