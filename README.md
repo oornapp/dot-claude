@@ -8,6 +8,8 @@ Shared Claude Code configuration for the team — statusline, settings, and rule
 npx @oorn/dotclaude init
 ```
 
+`jq` is required for the statusline. The installer will attempt to install it automatically via the available package manager on your system (Homebrew, apt, dnf, yum, pacman, zypper, apk, winget, Chocolatey, or Scoop). If auto-install fails, you'll be shown the manual command.
+
 To update to the latest version:
 
 ```bash
@@ -20,6 +22,7 @@ npx @oorn/dotclaude@latest init
 |------|-------------|-------------|
 | `settings.json` | `~/.claude/settings.json` | Claude Code preferences |
 | `statusline-command.sh` | `~/.claude/statusline-command.sh` | Status line script |
+| `rules/git-commits.md` | `~/.claude/rules/git-commits.md` | Rule: no AI attribution in commits |
 
 ## Statusline
 
@@ -59,13 +62,6 @@ Cost is estimated using a 70/30 input/output token split with per-model pricing:
 | Haiku 4.x / 3.x | $0.8/MTok | $4/MTok |
 
 For 3rd-party models the right section is omitted — token usage is already visible in the bar.
-
-### Requirements
-
-- `jq` — used to parse the JSON Claude Code passes to the script
-  ```bash
-  brew install jq
-  ```
 
 ### How it works
 
@@ -114,13 +110,20 @@ The full payload Claude Code sends to the script includes:
 }
 ```
 
-Other fields you could add to the statusline: `cost.total_cost_usd`, `cost.total_lines_added/removed`, cache hit ratio from `cache_read_input_tokens`, `exceeds_200k_tokens` warning.
+## Rules
+
+Rules are installed into `~/.claude/rules/` and apply globally to all Claude Code sessions.
+
+| Rule | Description |
+|------|-------------|
+| `git-commits.md` | Suppresses AI attribution lines (`Co-Authored-By`, `Generated with Claude Code`) from commit messages |
 
 ## Updating the config
 
 1. Edit files in `.claude/`
 2. Bump version in `package.json`
-3. Publish and push:
+3. Update this README to reflect the change
+4. Publish and push:
    ```bash
    npm publish --access public && git push
    ```
