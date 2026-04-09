@@ -1,0 +1,22 @@
+{
+  "name": "@oorn/dotclaude",
+  "version": "1.0.0",
+  "description": "Claude Code global config — statusline, settings, and rules",
+  "bin": {
+    "dotclaude": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    ".claude/"
+  ],
+  "scripts": {
+    "prepublishOnly": "node bin/cli.js --version"
+  },
+  "keywords": ["claude", "claude-code", "dotfiles"],
+  "author": "oorn",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
