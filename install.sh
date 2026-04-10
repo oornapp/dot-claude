@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# dot-claude install script
+# claw-statusline install script
 # Symlinks .claude config files into ~/.claude/
 
 set -e
@@ -7,7 +7,7 @@ set -e
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 
-echo "Installing dot-claude config to $CLAUDE_DIR..."
+echo "Installing claw-statusline config to $CLAUDE_DIR..."
 
 mkdir -p "$CLAUDE_DIR/rules" "$CLAUDE_DIR/skills"
 

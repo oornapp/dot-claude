@@ -19,7 +19,7 @@ if (args.includes('--version') || args.includes('-v')) {
 }
 
 if (args[0] !== 'init') {
-  console.log(`Usage: npx @oorn/dotclaude init`);
+  console.log(`Usage: npx @oorn/claw-statusline init`);
   process.exit(1);
 }
 
@@ -29,7 +29,7 @@ const green = (s) => `\x1b[32m${s}\x1b[0m`;
 const dim   = (s) => `\x1b[90m${s}\x1b[0m`;
 const bold  = (s) => `\x1b[1m${s}\x1b[0m`;
 
-console.log(`\n${bold('dot-claude')} — installing Claude Code config\n`);
+console.log(`\n${bold('claw-statusline')} — installing Claude Code config\n`);
 
 function installFile(src, dest) {
   const destDir = dirname(dest);
@@ -126,4 +126,4 @@ if (!hasCmd('jq')) {
 }
 
 console.log(`\n${dim('Claude Code will pick up changes automatically.')}`);
-console.log(`${dim('To update: npx @oorn/dotclaude@latest init')}\n`);
+console.log(`${dim('To update: npx @oorn/claw-statusline@latest init')}\n`);

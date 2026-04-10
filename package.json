@@ -1,9 +1,9 @@
 {
-  "name": "@oorn/dotclaude",
-  "version": "1.1.5",
-  "description": "Claude Code global config — statusline, settings, and rules",
+  "name": "@oorn/claw-statusline",
+  "version": "1.2.0",
+  "description": "Claude Code statusline, settings, and rules installer",
   "bin": {
-    "dotclaude": "bin/cli.js"
+    "claw-statusline": "bin/cli.js"
   },
   "files": [
     "bin/",

@@ -1,11 +1,11 @@
-# dot-claude
+# claw-statusline
 
 Shared Claude Code configuration for the team — statusline, settings, and rules.
 
 ## Install
 
 ```bash
-npx @oorn/dotclaude init
+npx @oorn/claw-statusline init
 ```
 
 `jq` is required for the statusline. The installer will attempt to install it automatically via the available package manager on your system (Homebrew, apt, dnf, yum, pacman, zypper, apk, winget, Chocolatey, or Scoop). If auto-install fails, you'll be shown the manual command.
@@ -13,7 +13,7 @@ npx @oorn/dotclaude init
 To update to the latest version:
 
 ```bash
-npx @oorn/dotclaude@latest init
+npx @oorn/claw-statusline@latest init
 ```
 
 ## What gets installed

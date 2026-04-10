@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-An npm package (`@oorn/dotclaude`) that installs shared Claude Code config (statusline, settings, rules) into `~/.claude/`. There are two install paths:
+An npm package (`@oorn/claw-statusline`) that installs shared Claude Code config (statusline, settings, rules) into `~/.claude/`. There are two install paths:
 
-- **npx** — `npx @oorn/dotclaude init` — copies files via `bin/cli.js`
+- **npx** — `npx @oorn/claw-statusline init` — copies files via `bin/cli.js`
 - **dev** — `./install.sh` — symlinks files for live editing
 
 ## Publishing workflow
