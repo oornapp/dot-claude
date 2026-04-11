@@ -1,6 +1,6 @@
 {
   "name": "@oorn/claw-statusline",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Claude Code statusline, settings, and rules installer",
   "bin": {
     "claw-statusline": "bin/cli.js"
